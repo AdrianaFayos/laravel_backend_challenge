@@ -17,8 +17,8 @@ class CreateParty extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('game_id')->references('id')->on('games');
+            // $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('game_id')->references('id')->on('game');
         });
     }
 

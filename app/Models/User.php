@@ -8,7 +8,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
+
 {
+
+    public function message (){
+        return $this -> hasMany(Message::class);
+    }
+
+    public function party (){
+        return $this -> belongsTo(PartyUser::class);
+    }
+
+
     use HasFactory, Notifiable;
 
     /**
