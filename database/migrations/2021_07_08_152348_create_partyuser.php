@@ -15,6 +15,8 @@ class CreatePartyuser extends Migration
     {
         Schema::create('partyuser', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('party_id')->references('id')->on('party');
             $table->timestamps();
         });
     }
