@@ -15,11 +15,10 @@ class User extends Authenticatable
         return $this -> hasMany(Message::class);
     }
 
-    public function party (){
+    public function partyuser (){
         return $this -> belongsTo(PartyUser::class);
     }
-
-
+    
     use HasFactory, Notifiable;
 
     /**

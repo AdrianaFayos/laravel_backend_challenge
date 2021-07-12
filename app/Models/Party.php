@@ -12,4 +12,9 @@ class Party extends Model
     public function message (){
         return $this -> hasMany(Message::class);
     }
+
+    public function partyuser (){
+        return $this -> belongsTo(PartyUser::class);
+    }
+
 }

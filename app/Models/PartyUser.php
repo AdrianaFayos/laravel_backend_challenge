@@ -10,6 +10,12 @@ class PartyUser extends Model
     use HasFactory;
 
     public function user (){
-        return $this -> belongsTo(PartyUser::class);
+        return $this -> hasMany(User::class);
+
+        
+    }
+
+    public function party (){
+        return $this -> hasMany(Party::class);
     }
 }
