@@ -13,11 +13,11 @@ class CreateMessage extends Migration
      */
     public function up()
     {
-        Schema::create('message', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('message');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('party_id')->references('id')->on('party');
+            $table->foreignId('party_id')->references('id')->on('partys');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateMessage extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message');
+        Schema::dropIfExists('messages');
     }
 }

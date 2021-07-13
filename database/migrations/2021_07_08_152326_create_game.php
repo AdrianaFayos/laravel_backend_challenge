@@ -13,7 +13,7 @@ class CreateGame extends Migration
      */
     public function up()
     {
-        Schema::create('game', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('thumbnail_url');
@@ -29,6 +29,6 @@ class CreateGame extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game');
+        Schema::dropIfExists('games');
     }
 }

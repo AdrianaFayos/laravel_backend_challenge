@@ -13,12 +13,12 @@ class CreateParty extends Migration
      */
     public function up()
     {
-        Schema::create('party', function (Blueprint $table) {
+        Schema::create('partys', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
             // $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('game_id')->references('id')->on('game');
+            $table->foreignId('game_id')->references('id')->on('games');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateParty extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('party');
+        Schema::dropIfExists('partys');
     }
 }
