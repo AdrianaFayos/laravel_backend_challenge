@@ -14,7 +14,25 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        $games = Game::all();
+
+        if($user->id === 1){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $games,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**
