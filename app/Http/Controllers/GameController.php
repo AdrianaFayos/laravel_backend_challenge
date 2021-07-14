@@ -29,6 +29,7 @@ class GameController extends Controller
         $user = auth()->user();
 
         if($user->id === 1){
+
             $this->validate( $request , [
                 'title' => 'required',
                 'thumbnail_url' => 'required',
@@ -36,18 +37,18 @@ class GameController extends Controller
 
             ]);
     
-            $game = new Game () ;
+            $game = Game::create ([
     
-            $game -> title = $request -> title;
-            $game -> thumbnail_url = $request -> thumbnail_url;
-            $game -> url = $request -> url;
-
+                'title' => $request -> title,
+                'thumbnail_url' => $request -> thumbnail_url,
+                'url' => $request -> url,
+            ]);
     
-            if($game->toArray()){
+            if($game){
     
                 return response() ->json([
                     'success' => true,
-                    'data' => $game->toArray()
+                    'data' => $game
                 ], 200);
     
             }
@@ -73,9 +74,37 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show($id)
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 1){
+            
+            $game = Game::where('id', '=', $id)->get();
+
+            if(!$game){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game not found',
+                ], 400);
+    
+            }
+    
+            return response() ->json([
+                'success' => true,
+                'data' => $game,
+            ], 200);
+    
+        } else {
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+    
+        }
+             
     }
 
     /**
@@ -98,6 +127,19 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 1){
+            
+            
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 }
