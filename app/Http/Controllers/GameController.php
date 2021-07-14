@@ -14,25 +14,23 @@ class GameController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
 
         $games = Game::all();
 
-        if($user->id === 1){
-
-            return response() ->json([
-                'success' => true,
-                'data' => $games,
-            ]);
-
-        } else {
+        if(!$games){
 
             return response() ->json([
                 'success' => false,
-                'message' => 'You do not have permision.',
+                'message' => 'Game not found',
             ], 400);
 
         }
+
+        return response() ->json([
+            'success' => true,
+            'data' => $games,
+        ]);
+
     }
 
     /**
@@ -122,6 +120,27 @@ class GameController extends Controller
             ], 400);
     
         }
+             
+    }
+
+    public function bytitle($title)
+    {       
+        $game = Game::where('title', '=', $title)->get();
+
+        if(!$game){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'Game not found',
+            ], 400);
+
+        }
+
+        return response() ->json([
+            'success' => true,
+            'data' => $game,
+        ], 200);
+    
              
     }
 
