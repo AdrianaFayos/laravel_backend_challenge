@@ -25,7 +25,46 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = auth()->user();
+
+        if($user->id === 1){
+            $this->validate( $request , [
+                'title' => 'required',
+                'thumbnail_url' => 'required',
+                'url' => 'required',
+
+            ]);
+    
+            $game = new Game () ;
+    
+            $game -> title = $request -> title;
+            $game -> thumbnail_url = $request -> thumbnail_url;
+            $game -> url = $request -> url;
+
+    
+            if($game->toArray()){
+    
+                return response() ->json([
+                    'success' => true,
+                    'data' => $game->toArray()
+                ], 200);
+    
+            }
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'Game not added',
+            ], 500);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**
