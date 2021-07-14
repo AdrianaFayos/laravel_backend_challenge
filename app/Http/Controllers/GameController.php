@@ -132,9 +132,49 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 1){
+
+            $game = Game::where('id', '=', $id);
+
+            if(!$game){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game not found',
+                ], 400);
+    
+            }
+
+            $updated = $game->update([
+                'title' => $request->input('title'),
+                'thumbnail_url' => $request->input('thumbnail_url'),
+                'url' => $request->input('url'),
+            ]);
+    
+            if($updated){
+                return response() ->json([
+                    'success' => true,
+                ]);
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game can not be updated',
+                ], 500);
+            }
+     
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**

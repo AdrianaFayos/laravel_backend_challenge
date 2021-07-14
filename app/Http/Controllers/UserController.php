@@ -102,9 +102,7 @@ class UserController extends Controller
             ], 400);
 
         }    
-
-        // $updated = $post->fill($request->all())->save();
-
+        
         $updated = $user->update([
             'name' => $request->input('name'),
             'streamUsername' => $request->input('streamUsername'),
