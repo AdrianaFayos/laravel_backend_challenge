@@ -76,8 +76,29 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $user = auth()->user()->find($id);
+
+        if(!$user){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'User not found',
+            ], 400);
+
+        }
+        if($user -> delete()){
+            return response() ->json([
+                'success' => true,
+            ], 200);
+            
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'User can not be deleted',
+            ], 500);
+        }
+
     }
 }
