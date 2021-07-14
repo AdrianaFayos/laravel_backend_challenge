@@ -143,13 +143,36 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy($id)
     {
         $user = auth()->user();
 
         if($user->id === 1){
-            
-            
+
+            $game = Game::where('id', '=', $id);
+
+            if(!$game){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game not found',
+                ], 400);
+    
+            }
+
+            if($game -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Game deleted',
+                ], 200);
+                
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game can not be deleted',
+                ], 500);
+            }
+     
 
         } else {
 

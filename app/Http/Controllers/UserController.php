@@ -145,6 +145,7 @@ class UserController extends Controller
         if($user -> delete()){
             return response() ->json([
                 'success' => true,
+                'message' => 'User deleted',
             ], 200);
             
         } else {
