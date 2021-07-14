@@ -61,11 +61,40 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $id = $request -> id;
+        // $id = $request -> id;
 
         $user = auth()->user()->find($id);
+
+        if(!$user){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'User not found',
+            ], 400);
+
+        }    
+
+        // $updated = $post->fill($request->all())->save();
+
+        $updated = $user->update([
+            'name' => $request->input('name'),
+            'streamUsername' => $request->input('streamUsername'),
+            'email' => $request->input('email'),
+        ]);
+
+        if($updated){
+            return response() ->json([
+                'success' => true,
+            ]);
+        } else {
+            return response() ->json([
+                'success' => false,
+                'message' => 'User can not be updated',
+            ], 500);
+        }
+
 
 
     }
