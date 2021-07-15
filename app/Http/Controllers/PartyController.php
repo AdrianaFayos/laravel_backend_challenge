@@ -72,9 +72,23 @@ class PartyController extends Controller
      * @param  \App\Models\Party  $party
      * @return \Illuminate\Http\Response
      */
-    public function show(Party $party)
+    public function show($id)
     {
-        //
+        $party = Party::where('id', '=', $id)->get();
+
+            if(!$party){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Party not found',
+                ], 400);
+    
+            }
+            
+            return response() ->json([
+                'success' => true,
+                'data' => $party,
+            ], 200);
     }
 
     /**
