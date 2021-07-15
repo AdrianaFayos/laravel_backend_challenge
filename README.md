@@ -62,8 +62,8 @@ Finally, enter the endpoints petitions in Postman and send them.
 - Party
    - POST /api/games --> Creates a new party. 
    - GET /api/games --> Shows all the parties. 
-   - GET /api/games/title/{TITLE} --> Shows one party by title.
-   - GET /api/games/{ID} --> Shows one party by id. (Only allowed user with id=1)
+   - GET /api/games/name/{NAME} --> Shows one party by title.
+   - GET /api/games/{ID} --> Shows one party by id. 
    - PUT /api/games/{ID} --> Updates party's information by id.
    - DELETE /api/games/{ID} --> Deletes a party by id. (Only allowed user with id=1)
 
