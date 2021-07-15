@@ -96,7 +96,7 @@ class GameController extends Controller
 
         if($user->id === 1){
             
-            $game = Game::where('id', '=', $id)->get();
+            $game = Game::where('id', '=', $id);
 
             if(!$game){
     
