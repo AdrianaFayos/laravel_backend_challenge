@@ -23,7 +23,7 @@ Route::post('login', [PassportAuthController::class, 'login']);
 
 // Find all games or game by title
 Route::get('games', [GameController::class, 'index']);
-Route::get('games/{title}', [GameController::class, 'bytitle']);
+Route::get('games/title/{title}', [GameController::class, 'bytitle']);
 
 Route::middleware('auth:api')->group(function(){
 
