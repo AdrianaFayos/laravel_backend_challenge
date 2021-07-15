@@ -49,4 +49,9 @@ class PassportAuthController extends Controller
                 return response()->json(['error' => 'Unauthorised'], 401);
             }
         }
+
+        // LOGOUT 
+        
+        public function logout(Request $request){
+        }    
 }

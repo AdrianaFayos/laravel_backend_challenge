@@ -13,6 +13,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+
+    // Find all users (only user with id=1)
+
     public function index()
     {
         $user = auth()->user();
@@ -61,6 +64,8 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
+    // Find one user by id (user profile)
     public function show($id)
     {
         $user = auth()->user()->find($id);
@@ -88,10 +93,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
+    // One user update his information
     public function update(Request $request, $id)
     {
-        // $id = $request -> id;
-
         $user = auth()->user()->find($id);
 
         if(!$user){
@@ -128,6 +133,8 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+
+     // Delete user
     public function destroy($id)
     {
         $user = auth()->user()->find($id);
