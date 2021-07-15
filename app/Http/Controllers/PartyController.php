@@ -16,7 +16,7 @@ class PartyController extends Controller
     {
         $parties = Party::all();
 
-        if(!$games){
+        if(!$parties){
 
             return response() ->json([
                 'success' => false,
@@ -45,26 +45,25 @@ class PartyController extends Controller
             'game_id' => 'required',
         ]);
 
-        if(auth()->user()){
+        $party = Party::create ([
+            'name' => $request -> name,
+            'game_id' => $request -> game_id,
+        ]);
 
-            $party = Party::create ([
-    
-                'name' => $request -> name,
-                'game_id' => $request -> game_id,
-
-            ]);
+        if ($party) {
 
             return response() ->json([
                 'success' => true,
                 'data' => $party
             ], 200);
-
+    
         }
 
         return response() ->json([
             'success' => false,
             'message' => 'Party not added',
         ], 500);
+
     }
 
     /**
