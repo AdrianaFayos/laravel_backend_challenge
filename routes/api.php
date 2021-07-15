@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\PartyController;
 use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -38,6 +39,9 @@ Route::middleware('auth:api')->group(function(){
     Route::put('games', [GameController::class, 'update']);
     Route::get('games/{id}', [GameController::class, 'show']);
     Route::delete('games', [GameController::class, 'destroy']);
+
+    // Create, update, delete or find parties enpoints 
+    Route::resource('parties', PartyController::class);
     
 });
 

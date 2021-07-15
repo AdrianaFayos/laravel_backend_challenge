@@ -29,7 +29,7 @@ class PartyController extends Controller
             'success' => true,
             'data' => $parties,
         ]);
-        
+
     }
 
     /**
@@ -40,7 +40,31 @@ class PartyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate( $request , [
+            'name' => 'required',
+            'game_id' => 'required',
+        ]);
+
+        if(auth()->user()){
+
+            $party = Party::create ([
+    
+                'name' => $request -> name,
+                'game_id' => $request -> game_id,
+
+            ]);
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party
+            ], 200);
+
+        }
+
+        return response() ->json([
+            'success' => false,
+            'message' => 'Party not added',
+        ], 500);
     }
 
     /**

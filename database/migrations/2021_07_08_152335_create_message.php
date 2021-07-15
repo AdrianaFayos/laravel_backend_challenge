@@ -17,7 +17,7 @@ class CreateMessage extends Migration
             $table->id();
             $table->string('message');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('party_id')->references('id')->on('partys');
+            $table->foreignId('party_id')->references('id')->on('parties');
             $table->timestamps();
         });
     }
