@@ -14,7 +14,22 @@ class PartyController extends Controller
      */
     public function index()
     {
-        //
+        $parties = Party::all();
+
+        if(!$games){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'Parties not found',
+            ], 400);
+
+        }
+
+        return response() ->json([
+            'success' => true,
+            'data' => $parties,
+        ]);
+        
     }
 
     /**
