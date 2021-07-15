@@ -21,7 +21,7 @@ Route::post('register', [PassportAuthController::class, 'register']);
 Route::post('login', [PassportAuthController::class, 'login']);
 
 Route::get('games', [GameController::class, 'index']);
-
+Route::get('games/{title}', [GameController::class, 'bytitle']);
 
 Route::middleware('auth:api')->group(function(){
     
@@ -29,7 +29,7 @@ Route::middleware('auth:api')->group(function(){
 
     Route::post('games', [GameController::class, 'store']);
     Route::put('games', [GameController::class, 'update']);
-    // Route::get('gamesbyid', [GameController::class, 'show']);
+    Route::get('games/{id}', [GameController::class, 'show']);
     Route::delete('games', [GameController::class, 'destroy']);
     
 });
