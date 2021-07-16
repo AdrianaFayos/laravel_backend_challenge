@@ -14,7 +14,25 @@ class MessageController extends Controller
      */
     public function index()
     {
-        
+        $user = auth()->user();
+
+        $messages = Message::all();
+
+        if($user->id === 1){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $messages,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**
