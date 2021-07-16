@@ -14,7 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +25,33 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = auth()->user();
+
+        $this->validate( $request , [
+            'message' => 'required',
+            'party_id' => 'required',
+        ]);
+
+        $party = Message::create ([
+            'message' => $request -> message,
+            'user_id' => $user->id,
+            'party_id' => $request -> party_id,
+        ]);
+
+        if ($party) {
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party
+            ], 200);
+    
+        }
+
+        return response() ->json([
+            'success' => false,
+            'message' => 'Party not added',
+        ], 500);
     }
 
     /**
