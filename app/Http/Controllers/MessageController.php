@@ -93,7 +93,14 @@ class MessageController extends Controller
                     'message' => 'Messages not found',
                 ], 400);
     
-            }
+            } else if ($message->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                    ], 400);
+    
+            } 
     
             return response() ->json([
                 'success' => true,
@@ -121,8 +128,14 @@ class MessageController extends Controller
                 'message' => 'Messages not found',
             ], 400);
 
-        }
+        } else if ($message->isEmpty()) {
+            
+            return response() ->json([
+                'success' => false,
+                'message' => 'Messages not found',
+                ], 400);
 
+        }        
         return response() ->json([
             'success' => true,
             'data' => $message,

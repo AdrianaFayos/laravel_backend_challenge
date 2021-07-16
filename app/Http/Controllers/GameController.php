@@ -105,7 +105,14 @@ class GameController extends Controller
                     'message' => 'Game not found',
                 ], 400);
     
-            }
+            } else if ($game->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Game not found',
+                    ], 400);
+    
+            } 
     
             return response() ->json([
                 'success' => true,
@@ -134,7 +141,14 @@ class GameController extends Controller
                 'message' => 'Game not found',
             ], 400);
 
-        }
+        } else if ($game->isEmpty()) {
+            
+            return response() ->json([
+                'success' => false,
+                'message' => 'Game not found',
+                ], 400);
+
+        } 
 
         return response() ->json([
             'success' => true,

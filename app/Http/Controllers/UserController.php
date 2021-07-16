@@ -77,7 +77,14 @@ class UserController extends Controller
                 'message' => 'User not found',
             ], 400);
 
-        }
+        } else if ($user->isEmpty()) {
+            
+            return response() ->json([
+                'success' => false,
+                'message' => 'User not found',
+                ], 400);
+
+        } 
 
         return response() ->json([
             'success' => true,

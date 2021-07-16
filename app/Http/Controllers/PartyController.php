@@ -83,7 +83,14 @@ class PartyController extends Controller
                     'message' => 'Party not found',
                 ], 400);
     
-            }
+            } else if ($party->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Party not found',
+                    ], 400);
+    
+            } 
 
             return response() ->json([
                 'success' => true,
@@ -102,7 +109,14 @@ class PartyController extends Controller
                     'message' => 'Party not found',
                 ], 400);
     
-            }
+            } else if ($party->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Party not found',
+                    ], 400);
+    
+            } 
 
             return response() ->json([
                 'success' => true,
