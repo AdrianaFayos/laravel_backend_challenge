@@ -78,9 +78,55 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 1){
+            
+            $message = Message::where('user_id', '=', $id)->get();
+
+            if(!$message){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                ], 400);
+    
+            }
+    
+            return response() ->json([
+                'success' => true,
+                'data' => $message,
+            ], 200);
+    
+        } else {
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+    
+        }
+    }
+
+    public function byparty($id)
+    {
+        $message = Message::where('party_id', '=', $id)->get();
+
+        if(!$message){
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'Messages not found',
+            ], 400);
+
+        }
+
+        return response() ->json([
+            'success' => true,
+            'data' => $message,
+        ], 200);
     }
 
     /**

@@ -74,8 +74,12 @@ Finally, enter the endpoints petitions in Postman and send them.
    - GET /api/games/{ID} --> Shows one game by id. (Only allowed user with id=1)
    - PUT /api/games/{ID} --> Updates game's information by id. (Only allowed user with id=1)
    - DELETE /api/games/{ID} --> Deletes a game by id. (Only allowed user with id=1)
-   
 
+-  Messages
+   - POST /api/messages --> Creates a new message. 
+   - GET /api/messages --> Shows all the messages. (Only allowed user with id=1)
+   - GET /api/messages/{USER_ID} --> Shows messages by user. (Only allowed user with id=1)
+   - GET /api/messages/party/{PARTY_ID} --> Shows messages by party.
 
 
 ## Models relation
