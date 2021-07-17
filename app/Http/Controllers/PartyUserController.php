@@ -25,7 +25,30 @@ class PartyUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        $this->validate( $request , [
+            'party_id' => 'required',
+        ]);
+
+        $partyuser = PartyUser::create ([
+            'user_id' => $user -> id,
+            'party_id' => $request -> party_id,
+        ]);
+
+        if ($partyuser) {
+
+            return response() ->json([
+                'success' => true,
+                'data' => $partyuser
+            ], 200);
+    
+        }
+
+        return response() ->json([
+            'success' => false,
+            'message' => 'Party-User not added',
+        ], 500);
     }
 
     /**
