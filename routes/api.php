@@ -51,7 +51,9 @@ Route::middleware('auth:api')->group(function(){
     Route::get('messages/party/{party_id}', [MessageController::class, 'byparty']);
 
      // Create, update, delete or find party-user enpoints 
-     Route::resource('partyuser', PartyUserController::class);
+    Route::resource('partyuser', PartyUserController::class);
+    Route::get('partyuser/user', [PartyUserController::class, 'byuser']);
+    Route::get('partyuser/party', [PartyUserController::class, 'byparty']);
 
     
 });

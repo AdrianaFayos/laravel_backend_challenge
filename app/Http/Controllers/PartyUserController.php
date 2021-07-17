@@ -14,7 +14,25 @@ class PartyUserController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        if($user->id === 1){
+
+            $partyuser = PartyUser::all();
+
+            return response() ->json([
+                'success' => true,
+                'data' => $partyuser,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**
@@ -23,6 +41,7 @@ class PartyUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $user = auth()->user();
@@ -49,6 +68,52 @@ class PartyUserController extends Controller
             'success' => false,
             'message' => 'Party-User not added',
         ], 500);
+    }
+
+    public function byuser()
+    {
+        $user = auth()->user();
+
+        $partyuser = PartyUser::where('user_id', '=', $user->id)->get();
+
+        if($user->id){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $partyuser,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
+    }
+
+    public function byparty(Request $request)
+    {
+        $user = auth()->user();
+
+        $partyuser = PartyUser::where('party_id', '=',  $request -> party_id)->get();
+
+        if($user->id){
+
+            return response() ->json([
+                'success' => true,
+                'data' => $partyuser,
+            ]);
+
+        } else {
+
+            return response() ->json([
+                'success' => false,
+                'message' => 'You do not have permision.',
+            ], 400);
+
+        }
     }
 
     /**
