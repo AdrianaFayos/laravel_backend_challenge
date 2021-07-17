@@ -3,6 +3,7 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PartyController;
+use App\Http\Controllers\PartyUserController;
 use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ Route::middleware('auth:api')->group(function(){
     // Create, update, delete or find messages enpoints 
     Route::resource('messages', MessageController::class);
     Route::get('messages/party/{party_id}', [MessageController::class, 'byparty']);
+
+     // Create, update, delete or find party-user enpoints 
+     Route::resource('partyuser', PartyUserController::class);
+
     
 });
 
