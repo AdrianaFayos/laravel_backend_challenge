@@ -55,7 +55,7 @@ Finally, enter the endpoints petitions in Postman and send them.
 
 - User
    - GET /api/users --> Shows all the users. (Only allowed user with id=1)
-   - GET /api/users/{ID} --> Shows one user by id. 
+   - GET /api/users/profile --> Shows one user by id. 
    - PUT /api/users/{ID} --> Updates user's information by id.
    - DELETE /api/users/{ID} --> Deletes a user by id.
 

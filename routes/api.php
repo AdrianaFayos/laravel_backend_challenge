@@ -35,6 +35,7 @@ Route::middleware('auth:api')->group(function(){
     
     // Create, update, delete or find users enpoints 
     Route::resource('users', UserController::class);
+    Route::get('games/profile', [UserController::class, 'show']);
 
     // Create, update, delete or find game by id enpoints
     Route::post('games', [GameController::class, 'store']);
