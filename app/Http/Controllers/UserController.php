@@ -68,7 +68,9 @@ class UserController extends Controller
     // Find one user by id (user profile)
     public function show($id)
     {
-        $user = auth()->user()->find($id);
+        $user = auth()->user();
+
+        $user1 = User::where('id', '=', $user->id)->get();
 
         if(!$user){
 
@@ -77,7 +79,7 @@ class UserController extends Controller
                 'message' => 'User not found',
             ], 400);
 
-        } else if ($user->isEmpty()) {
+        } else if ($user1->isEmpty()) {
             
             return response() ->json([
                 'success' => false,
@@ -88,7 +90,7 @@ class UserController extends Controller
 
         return response() ->json([
             'success' => true,
-            'data' => $user,
+            'data' => $user1,
         ], 200);
 
     }
