@@ -50,24 +50,33 @@ class PartyUserController extends Controller
             'party_id' => 'required',
         ]);
 
-        $partyuser = PartyUser::create ([
-            'user_id' => $user -> id,
-            'party_id' => $request -> party_id,
-        ]);
+        $check = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if ($partyuser) {
+        if($check->isEmpty()) {
 
-            return response() ->json([
-                'success' => true,
-                'data' => $partyuser
-            ], 200);
+            $partyuser = PartyUser::create ([
+                'user_id' => $user -> id,
+                'party_id' => $request -> party_id,
+            ]);
     
+            if ($partyuser) {
+    
+                return response() ->json([
+                    'success' => true,
+                    'data' => $partyuser
+                ], 200);
+        
+            }
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'Party-User not added',
+            ], 500);
         }
-
-        return response() ->json([
+        return response()->json([
             'success' => false,
-            'message' => 'Party-User not added',
-        ], 500);
+            'message' => "You are already at the party"
+        ], 200); 
     }
 
     public function byuser()
