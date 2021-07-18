@@ -66,7 +66,7 @@ class UserController extends Controller
      */
 
     // Find one user by id (user profile)
-    public function show($id)
+    public function show()
     {
         $user = auth()->user();
 
