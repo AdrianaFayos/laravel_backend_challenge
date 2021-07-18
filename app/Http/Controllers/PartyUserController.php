@@ -154,8 +154,37 @@ class PartyUserController extends Controller
      * @param  \App\Models\PartyUser  $partyUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PartyUser $partyUser)
+    public function destroy(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        $check = PartyUser::where('party_id', '=',$request -> party_id)->where('user_id', '=', $user->id)->get();
+
+        if( $check->isEmpty() ){
+        
+            return response()->json([
+                'success' => false,
+                'message' => "You are not at this party."
+            ], 400); 
+
+        } else {
+            
+            try{
+                $check = PartyUser::selectRaw('id')
+                ->where('party_id', '=', $request -> party_id)
+                ->where('user_id', '=', $user->id)->delete();
+
+                return response()->json([
+                    'success' => true,
+                    'messate' => "You have left the party"
+                ], 200); 
+
+            }catch(QueryException $err){
+                return response()->json([
+                    'success' => false,
+                    'data' => $err
+                ], 400); 
+            }
+        }
     }
 }
