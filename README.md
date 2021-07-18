@@ -41,7 +41,7 @@ Run the server.
 
 Finally, enter the endpoints petitions in Postman and send them.
 
-<a href="https://www.postman.com/"><img src="img/runpostmaN.png" width="150"></a>
+<a href="https://www.postman.com/"><img src="img/runpostman.png" width="150"></a>
 
 <img src="img/postmanScreen.png" width="1500">
 
@@ -60,18 +60,20 @@ Finally, enter the endpoints petitions in Postman and send them.
    - DELETE /api/users/{ID} --> Deletes a user by id.
 
 - Party
-   - POST /api/games --> Creates a new party. 
-   - GET /api/games --> Shows all the parties. 
-   - GET /api/games/name/{NAME} --> Shows one party by title.
-   - GET /api/games/{ID} --> Shows one party by id. 
-   - PUT /api/games/{ID} --> Updates party's information by id.
-   - DELETE /api/games/{ID} --> Deletes a party by id. (Only allowed user with id=1)
+   - POST /api/parties --> Creates a new party. 
+   - GET /api/parties --> Shows all the parties. 
+   - GET /api/parties/name/{NAME} --> Shows one party by title.
+   - GET /api/parties/game/{GAME_NAME} --> Shows one party by game name.
+   - GET /api/parties/{ID} --> Shows one party by id. 
+   - PUT /api/parties/{ID} --> Updates party's information by id.
+   - DELETE /api/parties/{ID} --> Deletes a party by id. (Only allowed user with id=1)
 
 -  Party_Users
-   - POST /api/partyuser --> Creates a new party_user. 
+   - POST /api/partyuser --> One user enters into a party.
    - GET /api/partyuser --> Shows all the party_users. (Only allowed user with id=1)
    - GET /api/partyuser/user --> Shows party_user by user.
    - GET /api/partyuser/party --> Shows party_user by party.   
+   - DELETE /api/partyuser/delete --> One user leaves a party.
 
 - Games
    - POST /api/games --> Creates a new game. (Only allowed user with id=1)

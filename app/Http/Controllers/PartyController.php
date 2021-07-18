@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Party;
 use Illuminate\Http\Request;
 
@@ -116,6 +117,35 @@ class PartyController extends Controller
                     'message' => 'Party not found',
                     ], 400);
     
+            } 
+
+            return response() ->json([
+                'success' => true,
+                'data' => $party,
+            ], 200);
+    }
+
+    public function bygame($title)
+    {
+
+        // $game = Game::where('title', '=', $title);
+
+        $party = Party::where('game_id', '=', $title)->get();
+
+            if(!$party){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Party not found',
+                ], 400);
+    
+            } else if ($party->isEmpty()) {
+            
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Party not found',
+                    ], 400);
+
             } 
 
             return response() ->json([
