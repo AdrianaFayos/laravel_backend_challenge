@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\PartyUser;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -51,25 +52,38 @@ class MessageController extends Controller
             'party_id' => 'required',
         ]);
 
-        $party = Message::create ([
-            'message' => $request -> message,
-            'user_id' => $user->id,
-            'party_id' => $request -> party_id,
-        ]);
+        $check = PartyUser::where('party_id', '=', $request->party_id)->where('user_id', '=', $user->id)->get();
 
-        if ($party) {
-
-            return response() ->json([
-                'success' => true,
-                'data' => $party
-            ], 200);
-    
+        if($check->isEmpty()){
+        
+            return response()->json([
+                'success' => false,
+                'message' => "You need to be at the party"
+            ], 400);
         }
 
-        return response() ->json([
-            'success' => false,
-            'message' => 'Party not added',
-        ], 500);
+        else {
+            
+            $party = Message::create ([
+                'message' => $request -> message,
+                'user_id' => $user->id,
+                'party_id' => $request -> party_id,
+            ]);
+    
+            if ($party) {
+    
+                return response() ->json([
+                    'success' => true,
+                    'data' => $party
+                ], 200);
+        
+            }
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'Party not added',
+            ], 500);
+        }
     }
 
     /**
