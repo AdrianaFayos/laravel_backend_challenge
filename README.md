@@ -87,7 +87,7 @@ Finally, enter the endpoints petitions in Postman and send them.
    - GET /api/messages --> Shows all the messages. (Only allowed user with id=1)
    - GET /api/messages/{USER_ID} --> Shows messages by user. (Only allowed user with id=1)
    - GET /api/messages/party/{PARTY_ID} --> Shows messages by party.
-
+   - DELETE /api/messages} --> Deletes a message by id. 
 
 
 

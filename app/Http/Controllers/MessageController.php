@@ -178,7 +178,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        $message = Message::where('id', '=', $request->message_id)->get();
+        $message = Message::all()->find($request->message_id);  
 
         if($message->isEmpty()){
             return response()->json([
@@ -198,9 +198,7 @@ class MessageController extends Controller
             
         } elseif ( $user->id === $message->user_id ){
 
-            $msg = Message::all()->find($request->message_id);    
-
-            if($msg -> delete()) {
+            if($message -> delete()) {
                 return response() ->json([
                     'success' => true,
                     'message' => 'Message deleted',
