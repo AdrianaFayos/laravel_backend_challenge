@@ -178,7 +178,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        $message = Message::all()->find($request->message_id);  
+        $message = Message::where('id', '=', $request->message_id)->get();
 
         if($message->isEmpty()){
             return response()->json([
