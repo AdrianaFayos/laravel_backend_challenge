@@ -188,11 +188,11 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
         $user = auth()->user();
 
-        $message = Message::all()->find( $request->message_id );
+        $message = Message::all()->find($id);
 
         if($message->isEmpty()){
             return response()->json([
