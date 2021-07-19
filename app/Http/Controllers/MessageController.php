@@ -194,14 +194,7 @@ class MessageController extends Controller
 
         $msg = Message::all()->find($id);
 
-        if($msg->isEmpty()){
-            return response()->json([
-                'success' => false,
-                'message' => "The message could not be found."
-            ], 400);
-        }
-
-        elseif ( $user->id === $msg->user_id ){
+        if ( $user->id == $msg->user_id ){
 
             if($msg -> delete()) {
                 return response() ->json([

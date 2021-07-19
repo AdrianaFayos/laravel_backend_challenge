@@ -51,13 +51,13 @@ Route::middleware('auth:api')->group(function(){
     // Create, update, delete or find messages enpoints 
     Route::resource('messages', MessageController::class);
     Route::get('messages/party/{id}', [MessageController::class, 'byparty']);
-    Route::delete('messages/delete', [MessageController::class, 'destroy']);
+    Route::delete('messages/delete/{id}', [MessageController::class, 'destroy']);
 
      // Create, update, delete or find party-user enpoints 
     Route::resource('partyuser', PartyUserController::class);
     Route::get('partyuser/user', [PartyUserController::class, 'byuser']);
     Route::get('partyuser/party', [PartyUserController::class, 'byparty']);
-    Route::delete('partyuser/delete/{id}', [PartyUserController::class, 'destroy']);
+    Route::delete('partyuser/delete', [PartyUserController::class, 'destroy']);
     
 });
 
