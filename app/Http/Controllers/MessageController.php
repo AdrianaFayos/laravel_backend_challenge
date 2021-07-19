@@ -192,18 +192,18 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        $message = Message::all()->find($id);
+        $msg = Message::all()->find($id);
 
-        if($message->isEmpty()){
+        if($msg->isEmpty()){
             return response()->json([
                 'success' => false,
                 'message' => "The message could not be found."
             ], 400);
         }
 
-        elseif ( $user->id === $message->user_id ){
+        elseif ( $user->id === $msg->user_id ){
 
-            if($message -> delete()) {
+            if($msg -> delete()) {
                 return response() ->json([
                     'success' => true,
                     'message' => 'Message deleted',
@@ -219,7 +219,7 @@ class MessageController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => "The message could not be deleted."
+                'message' => "You are not allowed to delete de message"
             ], 400);
         }
     }
