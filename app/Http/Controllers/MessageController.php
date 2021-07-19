@@ -192,7 +192,7 @@ class MessageController extends Controller
     {
         $user = auth()->user();
 
-        $message = Message::where('id', '=', $request->message_id)->get();
+        $message = Message::all()->find( $request->message_id );
 
         if($message->isEmpty()){
             return response()->json([
@@ -201,16 +201,7 @@ class MessageController extends Controller
             ], 400);
         }
 
-        $check = PartyUser::where('party_id', '=', $message[0]->party_id)->where('user_id', '=', $user->id)->get();
-
-        if($check->isEmpty()){
-        
-            return response()->json([
-                'success' => false,
-                'message' => "You need to be at the party"
-            ], 400);
-            
-        } elseif ( $user->id === $message->user_id ){
+        elseif ( $user->id === $message->user_id ){
 
             if($message -> delete()) {
                 return response() ->json([
@@ -225,6 +216,11 @@ class MessageController extends Controller
                 ], 500);
             }
 
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => "The message could not be deleted."
+            ], 400);
         }
     }
 }
