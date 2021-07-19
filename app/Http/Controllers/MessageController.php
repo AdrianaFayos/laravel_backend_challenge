@@ -133,6 +133,7 @@ class MessageController extends Controller
 
     public function byparty($id)
     {
+        $user = auth()->user();
     
         $check = PartyUser::where('party_id', '=', $id)->where('user_id', '=', $user->id)->get();
 
