@@ -133,27 +133,41 @@ class MessageController extends Controller
 
     public function byparty($id)
     {
-        $message = Message::where('party_id', '=', $id)->get();
+    
+        $check = PartyUser::where('party_id', '=', $id)->where('user_id', '=', $user->id)->get();
 
-        if(!$message){
-
-            return response() ->json([
+        if($check->isEmpty()){
+        
+            return response()->json([
                 'success' => false,
-                'message' => 'Messages not found',
+                'message' => "You need to be at the party"
             ], 400);
 
-        } else if ($message->isEmpty()) {
+        } else { 
             
-            return response() ->json([
-                'success' => false,
-                'message' => 'Messages not found',
-                ], 400);
+            $message = Message::where('party_id', '=', $id)->get();
 
-        }        
-        return response() ->json([
-            'success' => true,
-            'data' => $message,
-        ], 200);
+            if(!$message){
+    
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                ], 400);
+    
+            } else if ($message->isEmpty()) {
+                
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Messages not found',
+                    ], 400);
+    
+            }        
+            return response() ->json([
+                'success' => true,
+                'data' => $message,
+            ], 200);
+
+        }
     }
 
     /**
