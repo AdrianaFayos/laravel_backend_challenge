@@ -1,62 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h1 align="center">
+  <br>GAME'S CHAT BACKEND
+</h1>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+Challenge from the Fullstack Developer Bootcamp at <a href="https://geekshubsacademy.com/">GeeksHubs Academy</a> where have to develop a
+Full Backend structure (DDBB + PHP + Laravel). This backend allow users to contact other colleagues, to form groups to play a video games or just search for games.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Deployed with Heroku: <a href="https://afp-gameparty.herokuapp.com/">https://afp-gameparty.herokuapp.com/</a>.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Starting date: July 7th 2021. <br>
+Due date: July 19th 2021.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<img src="img/trelloScreen.png" width="1000">
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Instructions 🔧
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The first step is to clone the repository and install the project dependencies in your local repository.
 
-## Laravel Sponsors
+### `composer install`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Create the .env file and fill it with the values ​​from your database.
 
-### Premium Partners
+##### `DB_CONNECTION=mysql`
+##### `DB_HOST=127.0.0.1`
+##### `DB_PORT=3306`
+##### `DB_DATABASE=laravel`
+##### `DB_USERNAME=root`
+##### `DB_PASSWORD=password`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+Migrate the models to the database
 
-## Contributing
+### `php artisan migrate`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### `php artisan passport:install`
 
-## Code of Conduct
+Run the server.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### `php artisan serve`
 
-## Security Vulnerabilities
+Finally, enter the endpoints petitions in Postman and send them.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<a href="https://www.postman.com/"><img src="img/runpostman.png" width="150"></a>
 
-## License
+## Endpoints
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Register
+   - POST /api/register --> Register a new user and returns a token.
+
+- Login
+   - POST /api/login --> Login a created user and returns a token.
+
+- User
+   - GET /api/users --> Shows all the users. (Only allowed user with id=1)
+   - GET /api/users/profile --> Shows one user by id. 
+   - PUT /api/users/{ID} --> Updates user's information by id.
+   - DELETE /api/users/{ID} --> Deletes a user by id.
+
+- Party
+   - POST /api/parties --> Creates a new party. 
+   - GET /api/parties --> Shows all the parties. 
+   - GET /api/parties/name/{NAME} --> Shows one party by title.
+   - GET /api/parties/game/{GAME_NAME} --> Shows one party by game name.
+   - GET /api/parties/{ID} --> Shows one party by id. 
+   - PUT /api/parties/{ID} --> Updates party's information by id.
+   - DELETE /api/parties/{ID} --> Deletes a party by id. (Only allowed user with id=1)
+
+-  Party_Users
+   - POST /api/partyuser --> One user enters into a party.
+   - GET /api/partyuser --> Shows all the party_users. (Only allowed user with id=1)
+   - GET /api/partyuser/user --> Shows party_user by user.
+   - GET /api/partyuser/party --> Shows party_user by party.   
+   - DELETE /api/partyuser/delete --> One user leaves a party.
+
+- Games
+   - POST /api/games --> Creates a new game. (Only allowed user with id=1)
+   - GET /api/games --> Shows all the games. 
+   - GET /api/games/title/{TITLE} --> Shows one game by title.
+   - GET /api/games/{ID} --> Shows one game by id. (Only allowed user with id=1)
+   - PUT /api/games/{ID} --> Updates game's information by id. (Only allowed user with id=1)
+   - DELETE /api/games/{ID} --> Deletes a game by id. (Only allowed user with id=1)
+
+-  Messages
+   - POST /api/messages --> Creates a new message. 
+   - GET /api/messages --> Shows all the messages. (Only allowed user with id=1)
+   - GET /api/messages/{USER_ID} --> Shows messages by user. (Only allowed user with id=1)
+   - GET /api/messages/party/{PARTY_ID} --> Shows messages by party.
+   - DELETE /api/messages/delete/{ID} --> Deletes a message by id. 
+
+
+
+## Models relation
+
+<img src="img/diagrama.png" width="1500">
+
+
+## Used technologies
+
+<img src="img/php.png" width="70"> <img src="img/laravel.png" width="60"> <img src="img/composer.png" width="45"> <img src="img/sql.png" width="60"> <img src="img/postman.png" width="50"> <img src="img/trello.png" width="50">
+
+Installed dependencies: PASSPORT/LARAVEL 
+
+## Developer ✍️
+
+[Adriana Fayos](https://github.com/AdrianaFayos)
+
+---

@@ -7,9 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Passport\HasApiTokens;
+
 class User extends Authenticatable
+
 {
-    use HasFactory, Notifiable;
+
+    public function message () {
+        return $this -> hasMany(Message::class);
+    }
+
+    public function partyuser(){
+        return $this -> belongsTo (PartyUser::class);
+    }
+    
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +30,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'streamUsername',
         'email',
         'password',
     ];
