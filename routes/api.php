@@ -57,7 +57,7 @@ Route::middleware('auth:api')->group(function(){
     Route::resource('partyuser', PartyUserController::class);
     Route::get('partyuser/user', [PartyUserController::class, 'byuser']);
     Route::get('partyuser/party', [PartyUserController::class, 'byparty']);
-    Route::delete('partyuser/delete', [PartyUserController::class, 'destroy']);
+    Route::delete('partyuser/delete/{id}', [PartyUserController::class, 'destroy']);
     
 });
 
