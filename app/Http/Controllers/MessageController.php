@@ -174,8 +174,45 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        $message = Message::where('id', '=', $request->message_id)->get();
+
+        if($message->isEmpty()){
+            return response()->json([
+                'success' => false,
+                'message' => "The message could not be found."
+            ], 400);
+        }
+
+        $check = PartyUser::where('party_id', '=', $message[0]->party_id)->where('user_id', '=', $user->id)->get();
+
+        if($check->isEmpty()){
+        
+            return response()->json([
+                'success' => false,
+                'message' => "You need to be at the party"
+            ], 400);
+            
+        } elseif ( $user->id === $message->user_id ){
+
+            $msg = Message::all()->find($request->message_id);    
+
+            if($msg -> delete()) {
+                return response() ->json([
+                    'success' => true,
+                    'message' => 'Message deleted',
+                ], 200);
+                
+            } else {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'Message can not be deleted',
+                ], 500);
+            }
+
+        }
     }
 }
