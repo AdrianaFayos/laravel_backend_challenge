@@ -4,12 +4,13 @@
 
 ---
 
-Challenge from the Fullstack Developer Bootcamp at <a href="https://geekshubsacademy.com/">GeeksHubs Academy</a>.
+Challenge from the Fullstack Developer Bootcamp at <a href="https://geekshubsacademy.com/">GeeksHubs Academy</a> where have to develop a
+Full Backend structure (DDBB + PHP + Laravel). This backend allow users to contact other colleagues, to form groups to play a video games or just search for games.
+
+Deployed with Heroku: <a href="https://afp-gameparty.herokuapp.com/">https://afp-gameparty.herokuapp.com/</a>.
 
 Starting date: July 7th 2021. <br>
 Due date: July 19th 2021.
-
-I used trello to to have a better organization.
 
 <img src="img/trelloScreen.png" width="1000">
 
@@ -42,8 +43,6 @@ Run the server.
 Finally, enter the endpoints petitions in Postman and send them.
 
 <a href="https://www.postman.com/"><img src="img/runpostman.png" width="150"></a>
-
-<img src="img/postmanScreen.png" width="1500">
 
 ## Endpoints
 
